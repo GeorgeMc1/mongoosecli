@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const movieSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -13,5 +12,15 @@ const movieSchema = new mongoose.Schema({
     director: {
         type: String,
         default: "Not Specified"
+    },
+    rating: {
+        type: Number,
+        default: 5,
+        min: 0,
+        max: 5
     }
 })
+
+const MovieCollection = mongoose.model("Movies", movieSchema);
+
+module.exports = MovieCollection;
