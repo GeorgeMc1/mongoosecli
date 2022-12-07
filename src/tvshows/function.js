@@ -1,32 +1,32 @@
-const MovieCollection = require("./model");
+const TvShowCollection = require("./model");
 require("mongoose");
 
-createMovie = async (movieObject) => {
+createShow = async (showObject) => {
     try {
-        const newMovie = await MovieCollection.create(movieObject);
-        console.log(newMovie);
+        const newShow = await TvShowCollection.create(showObject);
+        console.log(newShow);
     } catch (error) {
         console.log(error);
     }
 }
-readMovies = async (query, search) => {
+readShows = async (query, search) => {
     try {
         let results;
         switch(query){
             case "title":
-                results = await MovieCollection.find({query: search});
+                results = await TvShowCollection.find({query: search});
                 break;
             case "actor":
-                results = await MovieCollection.find({actor: search});
+                results = await TvShowCollection.find({actor: search});
                 break;
             case "director":
-                results = await MovieCollection.find({director: search});
+                results = await TvShowCollection.find({director: search});
                 break;
             case "rating":
-                results = await MovieCollection.find({rating: search});
+                results = await TvShowCollection.find({rating: search});
                 break;
             default:
-                results = await MovieCollection.find();
+                results = await TvShowCollection.find();
         }
         let temp = [];
         results.forEach(result => {
@@ -37,20 +37,20 @@ readMovies = async (query, search) => {
         console.log(error);
     }
 }
-updateMovie = async (query, change, newValue) => {
+updateShow = async (query, change, newValue) => {
     try {
         if(change === "title"){
             console.log("changing title");
-            await MovieCollection.updateOne({title: query}, {title: newValue});
+            await TvShowCollection.updateOne({title: query}, {title: newValue});
         } else if(change === "actor"){
             console.log("changing actor");
-            await MovieCollection.updateOne({title: query}, {actor: newValue});
+            await TvShowCollection.updateOne({title: query}, {actor: newValue});
         } else if(change === "director"){
             console.log("changing director");
-            await MovieCollection.updateOne({title: query}, {director: newValue});
+            await TvShowCollection.updateOne({title: query}, {director: newValue});
         } else if(change === "rating"){
             console.log("changing rating");
-            await MovieCollection.updateOne({title: query}, {rating: newValue});
+            await TvShowCollection.updateOne({title: query}, {rating: newValue});
         } else {
             console.log("please specify what you want to update");
         }
@@ -58,12 +58,12 @@ updateMovie = async (query, change, newValue) => {
         console.log(error);
     }
 }
-deleteMovie = async (movie) => {
+deleteShow = async (show) => {
     try {
-        await MovieCollection.deleteOne({title: movie});
+        await TvShowCollection.deleteOne({title: show});
     } catch (error) {
         console.log(error);
     }
 }
 
-module.exports = {createMovie, readMovies, updateMovie, deleteMovie};
+module.exports = {createShow, readShows, updateShow, deleteShow};
