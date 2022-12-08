@@ -9,12 +9,12 @@ createMovie = async (movieObject) => {
         console.log(error);
     }
 }
-readMovies = async (query, search) => {
+readMovies = async (read, search) => {
     try {
         let results;
-        switch(query){
+        switch(read){
             case "title":
-                results = await MovieCollection.find({query: search});
+                results = await MovieCollection.find({title: search});
                 break;
             case "actor":
                 results = await MovieCollection.find({actor: search});
@@ -37,18 +37,18 @@ readMovies = async (query, search) => {
         console.log(error);
     }
 }
-updateMovie = async (query, change, newValue) => {
+updateMovie = async (query, update, newValue) => {
     try {
-        if(change === "title"){
+        if(update === "title"){
             console.log("changing title");
             await MovieCollection.updateOne({title: query}, {title: newValue});
-        } else if(change === "actor"){
+        } else if(update === "actor"){
             console.log("changing actor");
             await MovieCollection.updateOne({title: query}, {actor: newValue});
-        } else if(change === "director"){
+        } else if(update === "director"){
             console.log("changing director");
             await MovieCollection.updateOne({title: query}, {director: newValue});
-        } else if(change === "rating"){
+        } else if(update === "rating"){
             console.log("changing rating");
             await MovieCollection.updateOne({title: query}, {rating: newValue});
         } else {
